@@ -23,12 +23,12 @@
     --text-primary: #e2e8f0;
     --text-secondary: #a0aec0;
     --text-dim: #64748b;
-    --glass-bg: rgba(30, 41, 59, 0.3);
-    --glass-border: rgba(129, 230, 217, 0.15);
-    --shadow-primary: rgba(129, 230, 217, 0.25);
-    --shadow-dark: rgba(0, 0, 0, 0.5);
-    --glow-primary: rgba(129, 230, 217, 0.4);
-    --glow-accent: rgba(246, 224, 94, 0.3);
+    --glass-bg: rgba(30, 41, 59, 0.4);
+    --glass-border: rgba(129, 230, 217, 0.2);
+    --shadow-primary: rgba(129, 230, 217, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.6);
+    --glow-primary: rgba(129, 230, 217, 0.5);
+    --glow-accent: rgba(246, 224, 94, 0.4);
 }
 
 * {
@@ -43,8 +43,8 @@ body {
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
+    height: 100vh;
+    overflow: hidden;
     position: relative;
 }
 
@@ -56,9 +56,9 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 20%, rgba(129, 230, 217, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(246, 224, 94, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(79, 209, 197, 0.04) 0%, transparent 50%);
+        radial-gradient(circle at 20% 20%, rgba(129, 230, 217, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(246, 224, 94, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(79, 209, 197, 0.06) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
 }
@@ -66,25 +66,29 @@ body::before {
 .container {
     max-width: 1800px;
     width: 100%;
+    height: 100vh;
     margin: 0 auto;
-    padding: 40px 50px;
+    padding: 25px 40px;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 25px;
     position: relative;
+    flex-shrink: 0;
 }
 
 .header::before {
     content: '';
     position: absolute;
-    top: -30px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
+    width: 180px;
     height: 4px;
     background: linear-gradient(90deg, 
         transparent 0%, 
@@ -92,25 +96,25 @@ body::before {
         var(--accent-color) 50%, 
         var(--secondary-color) 80%, 
         transparent 100%);
-    border-radius: 2px;
-    box-shadow: 0 0 20px var(--glow-primary);
+    border-radius: 50px;
+    box-shadow: 0 0 30px var(--glow-primary);
     animation: pulseGlow 3s ease-in-out infinite alternate;
 }
 
 @keyframes pulseGlow {
-    0% { opacity: 0.6; transform: translateX(-50%) scaleX(0.8); }
+    0% { opacity: 0.7; transform: translateX(-50%) scaleX(0.8); }
     100% { opacity: 1; transform: translateX(-50%) scaleX(1.2); }
 }
 
 .header h1 {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 800;
-    font-size: 4.5rem;
+    font-size: 3.2rem;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 50%, var(--secondary-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 40px var(--glow-primary), 0 0 80px rgba(0, 212, 255, 0.2);
+    text-shadow: 0 0 50px var(--glow-primary), 0 0 100px rgba(0, 212, 255, 0.3);
     letter-spacing: 2px;
     position: relative;
     animation: titleFloat 6s ease-in-out infinite;
@@ -123,17 +127,18 @@ body::before {
 
 .controls-wrapper {
     background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(25px) saturate(200%);
     border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 40px;
-    margin-bottom: 60px;
+    border-radius: 50px;
+    padding: 25px;
+    margin-bottom: 25px;
     position: relative;
     box-shadow: 
-        0 32px 64px var(--shadow-dark),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        0 25px 50px var(--shadow-dark),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    flex-shrink: 0;
 }
 
 .controls-wrapper::before {
@@ -144,57 +149,57 @@ body::before {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-        rgba(129, 230, 217, 0.03) 0%, 
-        rgba(246, 224, 94, 0.02) 50%, 
-        rgba(79, 209, 197, 0.03) 100%);
-    border-radius: 24px;
+        rgba(129, 230, 217, 0.05) 0%, 
+        rgba(246, 224, 94, 0.03) 50%, 
+        rgba(79, 209, 197, 0.05) 100%);
+    border-radius: 50px;
     pointer-events: none;
     z-index: -1;
 }
 
 .controls-wrapper:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     box-shadow: 
-        0 48px 80px var(--shadow-dark),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.08),
-        0 0 60px rgba(129, 230, 217, 0.1);
+        0 40px 80px var(--shadow-dark),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.12),
+        0 0 60px rgba(129, 230, 217, 0.15);
 }
 
 .search-bar {
     display: flex;
     justify-content: center;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
     position: relative;
 }
 
 .search-input {
     width: 75%;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(15px);
     color: var(--text-primary);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    padding: 20px 40px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    padding: 16px 32px;
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 500;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     box-shadow: 
-        inset 0 2px 10px rgba(0, 0, 0, 0.3),
-        0 10px 30px rgba(0, 0, 0, 0.2);
+        inset 0 4px 15px rgba(0, 0, 0, 0.4),
+        0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .search-input:focus {
     outline: none;
     border-color: var(--primary-color);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.08);
     box-shadow: 
-        inset 0 2px 10px rgba(0, 0, 0, 0.3),
-        0 0 0 4px rgba(129, 230, 217, 0.2),
-        0 20px 40px rgba(129, 230, 217, 0.1),
+        inset 0 4px 15px rgba(0, 0, 0, 0.4),
+        0 0 0 4px rgba(129, 230, 217, 0.25),
+        0 15px 35px rgba(129, 230, 217, 0.15),
         0 0 60px var(--glow-primary);
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px) scale(1.02);
 }
 
 .search-input::placeholder {
@@ -205,42 +210,48 @@ body::before {
 .filter-bar {
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
 .filter-select, .reset-filters {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(15px);
     color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 16px 28px;
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 14px 24px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     font-size: 1rem;
     font-weight: 500;
     position: relative;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .filter-select {
     appearance: none;
     background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23a0aec0" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>');
     background-repeat: no-repeat;
-    background-position: right 18px center;
+    background-position: right 16px center;
     background-size: 14px;
-    padding-right: 50px;
-    min-width: 160px;
+    padding-right: 45px;
+    min-width: 150px;
+}
+
+.filter-select option {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    padding: 12px;
 }
 
 .filter-select:hover, .reset-filters:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(15, 23, 42, 0.9);
     border-color: var(--primary-color);
     transform: translateY(-2px);
     box-shadow: 
-        0 12px 30px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(129, 230, 217, 0.2);
+        0 12px 30px rgba(0, 0, 0, 0.4),
+        0 0 25px rgba(129, 230, 217, 0.3);
 }
 
 .reset-filters {
@@ -259,8 +270,8 @@ body::before {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
 }
 
 .reset-filters:hover::before {
@@ -271,7 +282,7 @@ body::before {
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     transform: translateY(-2px) scale(1.05);
     box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.4),
+        0 15px 35px rgba(0, 0, 0, 0.5),
         0 0 30px var(--glow-primary);
 }
 
@@ -283,34 +294,34 @@ body::before {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 20px;
     gap: 12px;
 }
 
 .filter-indicator {
-    background: rgba(129, 230, 217, 0.1);
-    border: 1px solid rgba(129, 230, 217, 0.3);
+    background: rgba(129, 230, 217, 0.15);
+    border: 1px solid rgba(129, 230, 217, 0.4);
     color: var(--text-primary);
     padding: 8px 16px;
-    border-radius: 20px;
+    border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
 }
 
 .filter-indicator:hover {
-    background: rgba(129, 230, 217, 0.15);
+    background: rgba(129, 230, 217, 0.2);
     transform: translateY(-1px);
 }
 
 .filter-indicator i {
     margin-left: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    opacity: 0.7;
+    transition: all 0.3s ease;
+    opacity: 0.8;
 }
 
 .filter-indicator i:hover {
@@ -321,18 +332,20 @@ body::before {
 
 .scroll-container {
     position: relative;
-    margin-bottom: 60px;
-    min-height: 420px;
+    flex: 1;
+    overflow: hidden;
 }
 
 .medicine-list {
     display: flex;
     overflow-x: auto;
-    padding: 40px 20px;
+    height: 100%;
+    padding: 20px 15px;
     scroll-behavior: smooth;
-    gap: 40px;
+    gap: 30px;
     scrollbar-width: thin;
     scrollbar-color: var(--primary-color) transparent;
+    align-items: center;
 }
 
 .medicine-list::-webkit-scrollbar {
@@ -340,14 +353,14 @@ body::before {
 }
 
 .medicine-list::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
 }
 
 .medicine-list::-webkit-scrollbar-thumb {
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    border-radius: 4px;
-    box-shadow: 0 0 10px var(--glow-primary);
+    border-radius: 50px;
+    box-shadow: 0 0 15px var(--glow-primary);
 }
 
 .medicine-list::-webkit-scrollbar-thumb:hover {
@@ -359,22 +372,22 @@ body::before {
     top: 50%;
     transform: translateY(-50%);
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
     color: var(--text-primary);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     font-size: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     z-index: 10;
     box-shadow: 
-        0 12px 30px var(--shadow-dark),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 15px 30px var(--shadow-dark),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15);
 }
 
 .scroll-button:hover {
@@ -384,7 +397,7 @@ body::before {
     box-shadow: 
         0 20px 40px var(--shadow-dark),
         0 0 40px var(--glow-primary),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        inset 0 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .scroll-button:active {
@@ -396,11 +409,11 @@ body::before {
 
 .medicine-item {
     flex: 0 0 auto;
-    width: 360px;
-    min-height: 360px;
-    border-radius: 32px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50px;
     background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(25px) saturate(200%);
     border: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;
@@ -410,13 +423,13 @@ body::before {
     cursor: pointer;
     position: relative;
     color: var(--text-primary);
-    padding: 40px;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    padding: 30px;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
     box-shadow: 
-        0 20px 50px var(--shadow-dark),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
+        0 20px 40px var(--shadow-dark),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .medicine-item::before {
@@ -429,10 +442,10 @@ body::before {
     background: linear-gradient(
         90deg, 
         transparent 0%, 
-        rgba(129, 230, 217, 0.1) 50%, 
+        rgba(129, 230, 217, 0.15) 50%, 
         transparent 100%
     );
-    transition: left 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: left 1s cubic-bezier(0.25, 0.8, 0.25, 1);
     z-index: 0;
 }
 
@@ -444,12 +457,12 @@ body::before {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-        rgba(129, 230, 217, 0.03) 0%, 
-        rgba(246, 224, 94, 0.02) 50%, 
-        rgba(79, 209, 197, 0.03) 100%);
-    border-radius: 32px;
+        rgba(129, 230, 217, 0.05) 0%, 
+        rgba(246, 224, 94, 0.03) 50%, 
+        rgba(79, 209, 197, 0.05) 100%);
+    border-radius: 50px;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
     z-index: 0;
 }
 
@@ -465,13 +478,13 @@ body::before {
 
 .medicine-item.active,
 .medicine-item:hover {
-    transform: scale(1.08) translateY(-12px);
+    transform: scale(1.08) translateY(-8px);
     border-color: var(--primary-color);
     box-shadow: 
-        0 40px 80px var(--shadow-dark),
+        0 35px 70px var(--shadow-dark),
         0 0 0 2px var(--primary-color),
         0 0 60px var(--glow-primary),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        inset 0 2px 0 rgba(255, 255, 255, 0.25);
 }
 
 .medicine-item > * {
@@ -482,15 +495,15 @@ body::before {
 .medicine-item-name {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 700;
-    font-size: 1.9rem;
+    font-size: 1.4rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     line-height: 1.2;
-    text-shadow: 0 0 20px var(--glow-primary);
-    transition: all 0.3s ease;
+    text-shadow: 0 0 25px var(--glow-primary);
+    transition: all 0.4s ease;
 }
 
 .medicine-item:hover .medicine-item-name {
@@ -498,12 +511,12 @@ body::before {
 }
 
 .medicine-item-info {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
     margin-bottom: 12px;
     line-height: 1.4;
     font-weight: 400;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .medicine-item:hover .medicine-item-info {
@@ -520,74 +533,74 @@ body::before {
 }
 
 .medicine-item-price {
-    font-size: 2.6rem;
+    font-size: 1.8rem;
     font-weight: 800;
     background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-top: 25px;
+    margin-top: 20px;
     text-shadow: 0 0 30px var(--glow-accent);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     font-family: 'JetBrains Mono', monospace;
 }
 
 .medicine-item:hover .medicine-item-price {
     transform: scale(1.1);
-    filter: brightness(1.2);
+    filter: brightness(1.3);
 }
 
 @media (max-width: 1200px) {
-    .container { padding: 35px 40px; }
-    .header h1 { font-size: 3.8rem; }
-    .medicine-item { width: 320px; min-height: 320px; padding: 35px; }
-    .medicine-item-name { font-size: 1.7rem; }
-    .medicine-item-price { font-size: 2.3rem; }
+    .container { padding: 20px 35px; }
+    .header h1 { font-size: 2.8rem; }
+    .medicine-item { width: 260px; height: 260px; padding: 25px; }
+    .medicine-item-name { font-size: 1.3rem; }
+    .medicine-item-price { font-size: 1.7rem; }
 }
 
 @media (max-width: 992px) {
-    .container { padding: 30px 35px; }
-    .header h1 { font-size: 3.2rem; }
-    .controls-wrapper { padding: 35px; }
-    .medicine-item { width: 300px; min-height: 300px; padding: 30px; }
-    .medicine-item-name { font-size: 1.6rem; }
-    .medicine-item-price { font-size: 2.1rem; }
+    .container { padding: 18px 30px; }
+    .header h1 { font-size: 2.5rem; }
+    .controls-wrapper { padding: 20px; }
+    .medicine-item { width: 240px; height: 240px; padding: 22px; }
+    .medicine-item-name { font-size: 1.2rem; }
+    .medicine-item-price { font-size: 1.6rem; }
 }
 
 @media (max-width: 768px) {
-    .container { padding: 25px 30px; }
-    .header h1 { font-size: 2.8rem; }
-    .controls-wrapper { padding: 30px; margin-bottom: 50px; }
-    .search-input { width: 95%; font-size: 1.1rem; padding: 18px 35px; }
-    .filter-select, .reset-filters { font-size: 0.95rem; padding: 14px 24px; }
+    .container { padding: 15px 25px; }
+    .header h1 { font-size: 2.2rem; }
+    .controls-wrapper { padding: 18px; margin-bottom: 20px; }
+    .search-input { width: 95%; font-size: 1rem; padding: 14px 28px; }
+    .filter-select, .reset-filters { font-size: 0.9rem; padding: 12px 20px; }
     .scroll-button { display: none; }
-    .medicine-list { gap: 25px; padding: 30px 10px; }
-    .medicine-item { width: 280px; min-height: 280px; border-radius: 28px; padding: 25px; }
-    .medicine-item-name { font-size: 1.4rem; }
-    .medicine-item-info { font-size: 1rem; }
-    .medicine-item-price { font-size: 1.9rem; }
+    .medicine-list { gap: 20px; padding: 15px 10px; }
+    .medicine-item { width: 220px; height: 220px; border-radius: 40px; padding: 20px; }
+    .medicine-item-name { font-size: 1.1rem; }
+    .medicine-item-info { font-size: 0.9rem; }
+    .medicine-item-price { font-size: 1.5rem; }
 }
 
 @media (max-width: 576px) {
-    .header h1 { font-size: 2.2rem; }
+    .header h1 { font-size: 1.9rem; }
     .search-input { width: 100%; }
     .filter-bar { flex-direction: column; align-items: stretch; gap: 15px; }
     .filter-select, .reset-filters { width: 100%; }
-    .medicine-list { gap: 20px; }
+    .medicine-list { gap: 18px; }
     .medicine-item { 
         width: calc(100% - 20px); 
-        min-height: 300px; 
-        border-radius: 24px; 
+        height: 200px; 
+        border-radius: 35px; 
         margin: 0 10px; 
     }
-    .medicine-item-name { font-size: 1.3rem; }
-    .medicine-item-price { font-size: 1.8rem; }
+    .medicine-item-name { font-size: 1rem; }
+    .medicine-item-price { font-size: 1.4rem; }
 }
 
 @keyframes slideInUp {
     from {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(40px);
     }
     to {
         opacity: 1;
@@ -601,11 +614,10 @@ body::before {
 }
 
 .medicine-item:nth-child(1) { animation-delay: 0.1s; }
-.medicine-item:nth-child(2) { animation-delay: 0.2s; }
-.medicine-item:nth-child(3) { animation-delay: 0.3s; }
-.medicine-item:nth-child(4) { animation-delay: 0.4s; }
-.medicine-item:nth-child(5) { animation-delay: 0.5s; }
-
+.medicine-item:nth-child(2) { animation-delay: 0.15s; }
+.medicine-item:nth-child(3) { animation-delay: 0.2s; }
+.medicine-item:nth-child(4) { animation-delay: 0.25s; }
+.medicine-item:nth-child(5) { animation-delay: 0.3s; }
 </style>
 </head>
 <body>

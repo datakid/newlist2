@@ -3,32 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lx Search p1</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+    <title>Lx Search P1.2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
+<style>
 :root {
-    --primary-color: #81e6d9;
-    --secondary-color: #4fd1c5;
-    --accent-color: #f6e05e;
-    --warning-color: #f6e05e;
-    --success-color: #81e6d9;
-    --bg-dark: #0f172a;
-    --bg-medium: #1e293b;
-    --bg-light: #334155;
-    --bg-card: #475569;
-    --text-primary: #e2e8f0;
-    --text-secondary: #a0aec0;
-    --text-dim: #64748b;
-    --glass-bg: rgba(30, 41, 59, 0.4);
-    --glass-border: rgba(129, 230, 217, 0.2);
-    --shadow-primary: rgba(129, 230, 217, 0.3);
-    --shadow-dark: rgba(0, 0, 0, 0.6);
-    --glow-primary: rgba(129, 230, 217, 0.5);
-    --glow-accent: rgba(246, 224, 94, 0.4);
+    --font-display: 'Orbitron', monospace;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --app-height: 100vh;
+    --color-bg-deep: #000308;
+    --color-bg-main: #040a18;
+    --color-bg-hud: rgba(8, 16, 32, 0.65);
+    --color-card-bg: linear-gradient(145deg, rgba(20, 35, 60, 0.35) 0%, rgba(8, 15, 28, 0.55) 100%);
+    --color-primary: #00e1ff;
+    --color-secondary: #57aeff;
+    --color-accent: #ffdb70;
+    --color-warning: #ff6b6b;
+    --color-text-primary: #f0f8ff;
+    --color-text-secondary: #b8d4f1;
+    --color-text-dim: #6c8bb0;
+    --glow-primary: rgba(0, 225, 255, 0.4);
+    --glow-accent: rgba(255, 219, 112, 0.45);
+    --glow-warning: rgba(255, 107, 107, 0.35);
+    --shadow-deep: rgba(0, 0, 0, 0.8);
+    --shadow-ambient: rgba(0, 225, 255, 0.1);
+    --border-hud: 1px solid rgba(0, 225, 255, 0.3);
+    --border-card: 1px solid rgba(0, 225, 255, 0.35);
+    --border-card-active: 2px solid var(--color-primary);
+    --radius-main: 28px;
+    --radius-controls: 16px;
+    --radius-card: 24px;
+    --transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-smooth: 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 * {
@@ -38,13 +49,13 @@
 }
 
 body {
-    background: radial-gradient(ellipse at top, var(--bg-medium) 0%, var(--bg-dark) 50%),
-                linear-gradient(135deg, var(--bg-dark) 0%, #0a101f 100%);
-    background-attachment: fixed;
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-    height: 100vh;
+    background: linear-gradient(135deg, var(--color-bg-deep) 0%, #000a1a 50%, var(--color-bg-main) 100%);
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    height: var(--app-height);
+    width: 100vw;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
     position: relative;
 }
 
@@ -53,897 +64,804 @@ body::before {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 20% 20%, rgba(129, 230, 217, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(246, 224, 94, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(79, 209, 197, 0.06) 0%, transparent 50%);
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(0, 225, 255, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255, 219, 112, 0.02) 0%, transparent 50%), radial-gradient(circle at 40% 60%, rgba(87, 174, 255, 0.02) 0%, transparent 50%);
     pointer-events: none;
-    z-index: 0;
+    z-index: 1;
 }
 
-.container {
-    max-width: 1800px;
-    width: 100%;
-    height: 100vh;
-    margin: 0 auto;
-    padding: 25px 40px;
-    position: relative;
-    z-index: 1;
+.app-container {
     display: flex;
     flex-direction: column;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 25px;
+    height: 100%;
     position: relative;
+    z-index: 2;
+    animation: systemBoot 1.5s ease-out;
+}
+
+@keyframes systemBoot {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+.hud-container {
+    padding: clamp(15px, 2.5vw, 25px) clamp(15px, 4vw, 35px);
     flex-shrink: 0;
+    z-index: 10;
 }
 
-.header::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 4px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        var(--primary-color) 20%, 
-        var(--accent-color) 50%, 
-        var(--secondary-color) 80%, 
-        transparent 100%);
-    border-radius: 50px;
-    box-shadow: 0 0 30px var(--glow-primary);
-    animation: pulseGlow 3s ease-in-out infinite alternate;
+.hud-controls {
+    background: var(--color-bg-hud);
+    backdrop-filter: blur(25px) saturate(200%);
+    border: var(--border-hud);
+    border-radius: var(--radius-main);
+    padding: clamp(18px, 3vw, 25px);
+    box-shadow: 0 25px 60px var(--shadow-deep), 0 0 40px var(--shadow-ambient), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
-@keyframes pulseGlow {
-    0% { opacity: 0.7; transform: translateX(-50%) scaleX(0.8); }
-    100% { opacity: 1; transform: translateX(-50%) scaleX(1.2); }
+.header-and-search {
+    display: grid;
+    grid-template-columns: minmax(auto, 280px) 1fr;
+    gap: 25px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .header h1 {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 800;
-    font-size: 3.2rem;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 50%, var(--secondary-color) 100%);
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 50px var(--glow-primary), 0 0 100px rgba(0, 212, 255, 0.3);
-    letter-spacing: 2px;
-    position: relative;
-    animation: titleFloat 6s ease-in-out infinite;
+    text-shadow: 0 0 30px var(--glow-primary);
+    letter-spacing: 3px;
+    animation: titlePulse 4s ease-in-out infinite;
 }
 
-@keyframes titleFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-}
-
-.controls-wrapper {
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px) saturate(200%);
-    border: 1px solid var(--glass-border);
-    border-radius: 50px;
-    padding: 25px;
-    margin-bottom: 25px;
-    position: relative;
-    box-shadow: 
-        0 25px 50px var(--shadow-dark),
-        inset 0 2px 0 rgba(255, 255, 255, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.08);
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    flex-shrink: 0;
-}
-
-.controls-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(129, 230, 217, 0.05) 0%, 
-        rgba(246, 224, 94, 0.03) 50%, 
-        rgba(79, 209, 197, 0.05) 100%);
-    border-radius: 50px;
-    pointer-events: none;
-    z-index: -1;
-}
-
-.controls-wrapper:hover {
-    transform: translateY(-3px);
-    box-shadow: 
-        0 40px 80px var(--shadow-dark),
-        inset 0 2px 0 rgba(255, 255, 255, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.12),
-        0 0 60px rgba(129, 230, 217, 0.15);
-}
-
-.search-bar {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    position: relative;
+@keyframes titlePulse {
+    0%,
+    100% {
+        text-shadow: 0 0 30px var(--glow-primary);
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 40px var(--glow-primary), 0 0 60px var(--glow-accent);
+        transform: scale(1.02);
+    }
 }
 
 .search-input {
-    width: 75%;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(15px);
-    color: var(--text-primary);
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    padding: 16px 32px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: relative;
-    box-shadow: 
-        inset 0 4px 15px rgba(0, 0, 0, 0.4),
-        0 10px 25px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+    border: var(--border-hud);
+    border-radius: var(--radius-controls);
+    padding: clamp(12px, 2vw, 15px) clamp(18px, 2.5vw, 22px);
+    color: var(--color-text-primary);
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    font-family: var(--font-mono);
+    transition: all var(--transition-smooth);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .search-input:focus {
     outline: none;
-    border-color: var(--primary-color);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 
-        inset 0 4px 15px rgba(0, 0, 0, 0.4),
-        0 0 0 4px rgba(129, 230, 217, 0.25),
-        0 15px 35px rgba(129, 230, 217, 0.15),
-        0 0 60px var(--glow-primary);
-    transform: translateY(-2px) scale(1.02);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 25px var(--glow-primary), inset 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 225, 255, 0.1);
+    transform: translateY(-2px);
 }
 
 .search-input::placeholder {
-    color: var(--text-dim);
-    font-weight: 400;
+    color: var(--color-text-dim);
+    font-style: italic;
 }
 
-.filter-bar {
+.filter-wrapper {
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    gap: 18px;
 }
 
-.filter-select, .reset-filters {
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(15px);
-    color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 14px 24px;
-    border-radius: 50px;
+.filter-select,
+.reset-button {
+    flex-grow: 1;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+    border: var(--border-hud);
+    padding: clamp(10px, 1.8vw, 12px) 18px;
+    border-radius: var(--radius-controls);
+    color: var(--color-text-secondary);
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    font-size: 1rem;
-    font-weight: 500;
-    position: relative;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-smooth);
+    font-size: clamp(0.9rem, 1.5vw, 0.95rem);
+    font-family: var(--font-mono);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .filter-select {
     appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23a0aec0" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>');
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="%2300e1ff"><path d="M7 10L2 5h10L7 10z"/></svg>');
     background-repeat: no-repeat;
-    background-position: right 16px center;
-    background-size: 14px;
+    background-position: right 18px center;
+    background-size: 12px;
     padding-right: 45px;
-    min-width: 150px;
 }
 
 .filter-select option {
-    background: var(--bg-dark);
-    color: var(--text-primary);
-    padding: 12px;
+    background: var(--color-bg-deep);
 }
 
-.filter-select:hover, .reset-filters:hover {
-    background: rgba(15, 23, 42, 0.9);
-    border-color: var(--primary-color);
+.filter-select:hover,
+.reset-button:hover {
+    border-color: var(--color-primary);
+    color: var(--color-text-primary);
+    box-shadow: 0 0 20px var(--glow-primary);
     transform: translateY(-2px);
-    box-shadow: 
-        0 12px 30px rgba(0, 0, 0, 0.4),
-        0 0 25px rgba(129, 230, 217, 0.3);
 }
 
-.reset-filters {
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+.reset-button {
+    flex-grow: 0;
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+    color: var(--color-bg-deep);
+    font-weight: 700;
     border: none;
-    color: var(--bg-dark);
-    font-weight: 600;
-    position: relative;
-    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.reset-filters::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.6s;
-}
-
-.reset-filters:hover::before {
-    left: 100%;
-}
-
-.reset-filters:hover {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.5),
-        0 0 30px var(--glow-primary);
-}
-
-.reset-filters i {
-    margin-right: 8px;
-}
-
-.filter-indicators {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 12px;
-}
-
-.filter-indicator {
-    background: rgba(129, 230, 217, 0.15);
-    border: 1px solid rgba(129, 230, 217, 0.4);
-    color: var(--text-primary);
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    backdrop-filter: blur(15px);
-    transition: all 0.4s ease;
-}
-
-.filter-indicator:hover {
-    background: rgba(129, 230, 217, 0.2);
+.reset-button:active {
     transform: translateY(-1px);
 }
 
-.filter-indicator i {
-    margin-left: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0.8;
+#status-bar {
+    min-height: 48px;
+    margin-top: 18px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-.filter-indicator i:hover {
+.suggestions-area, .filter-tags-container {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.suggestions-area strong {
+    color: var(--color-accent);
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--glow-accent);
+}
+
+.suggestions-area a {
+    color: var(--color-primary);
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 12px;
+    transition: all var(--transition-fast);
+    text-shadow: 0 0 8px var(--glow-primary);
+}
+
+.suggestions-area a:hover {
+    text-decoration: underline;
+    filter: brightness(1.3);
+    text-shadow: 0 0 15px var(--glow-primary);
+}
+
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(0, 225, 255, 0.15), rgba(0, 225, 255, 0.08));
+    border: 1px solid rgba(0, 225, 255, 0.4);
+    padding: 8px 16px;
+    border-radius: 25px;
+    color: var(--color-primary);
+    animation: tagAppear var(--transition-bounce);
+    box-shadow: 0 4px 15px rgba(0, 225, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.filter-tag span {
+    font-weight: 600;
+    margin-right: 10px;
+    text-shadow: 0 0 8px var(--glow-primary);
+}
+
+.filter-tag i {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all var(--transition-fast);
+    font-size: 0.9rem;
+}
+
+.filter-tag i:hover {
     opacity: 1;
-    color: var(--accent-color);
-    transform: scale(1.2);
+    transform: scale(1.3);
+    color: var(--color-warning);
+    text-shadow: 0 0 10px var(--glow-warning);
+}
+
+@keyframes tagAppear {
+    0% {
+        transform: scale(0.5) rotate(-10deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
 }
 
 .scroll-container {
     position: relative;
-    flex: 1;
-    overflow: hidden;
+    padding: 20px 0;
 }
 
-.medicine-list {
+#cardContainer {
     display: flex;
+    padding: 15px clamp(20px, 8vw, 90px);
     overflow-x: auto;
-    height: 100%;
-    padding: 20px 15px;
     scroll-behavior: smooth;
-    gap: 30px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) transparent;
-    align-items: center;
+    gap: clamp(20px, 3vw, 30px);
+    width: 100%;
+    scrollbar-width: none;
 }
 
-.medicine-list::-webkit-scrollbar {
-    height: 8px;
-}
-
-.medicine-list::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 50px;
-}
-
-.medicine-list::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    border-radius: 50px;
-    box-shadow: 0 0 15px var(--glow-primary);
-}
-
-.medicine-list::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+#cardContainer::-webkit-scrollbar {
+    display: none;
 }
 
 .scroll-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px);
-    color: var(--text-primary);
-    border: 1px solid var(--glass-border);
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: linear-gradient(145deg, rgba(8, 16, 32, 0.8), rgba(0, 10, 20, 0.9));
+    backdrop-filter: blur(15px);
+    color: var(--color-text-dim);
+    border: var(--border-hud);
+    width: clamp(40px, 5vw, 50px);
+    height: clamp(70px, 10vh, 90px);
+    border-radius: var(--radius-controls);
+    font-size: 1.4rem;
     cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 10;
-    box-shadow: 
-        0 15px 30px var(--shadow-dark),
-        inset 0 2px 0 rgba(255, 255, 255, 0.15);
+    transition: all var(--transition-smooth);
+    z-index: 20;
 }
 
 .scroll-button:hover {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--bg-dark);
-    transform: translateY(-50%) scale(1.15);
-    box-shadow: 
-        0 20px 40px var(--shadow-dark),
-        0 0 40px var(--glow-primary),
-        inset 0 2px 0 rgba(255, 255, 255, 0.3);
-}
-
-.scroll-button:active {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
     transform: translateY(-50%) scale(1.05);
 }
 
-.scroll-left { left: -30px; }
-.scroll-right { right: -30px; }
+.scroll-left {
+    left: clamp(10px, 2vw, 25px);
+}
 
-.medicine-item {
-    flex: 0 0 auto;
-    width: 280px;
-    height: 280px;
-    border-radius: 50px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px) saturate(200%);
-    border: 1px solid var(--glass-border);
+.scroll-right {
+    right: clamp(10px, 2vw, 25px);
+}
+
+.item-card {
+    flex: 0 0 clamp(280px, 30vw, 320px);
+    height: 190px;
+    background: var(--color-card-bg);
+    border: var(--border-card);
+    border-radius: var(--radius-card);
+    padding: 20px;
+    cursor: pointer;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--shadow-ambient), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: all var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
+}
+
+.item-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--color-primary);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px var(--glow-primary);
+}
+
+.card-name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(0, 225, 255, 0.3);
+    letter-spacing: 1px;
+}
+
+.card-separator {
+    height: 2px;
+    border: 0;
+    background: linear-gradient(90deg, transparent, var(--color-primary) 20%, var(--color-accent) 80%, transparent);
+    margin-bottom: 12px;
+    opacity: 0.6;
+}
+
+.card-details {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    font-family: var(--font-mono);
+}
+
+.info-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.info-row strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.info-row span {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.card-price {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-accent);
+    text-shadow: 0 0 20px var(--glow-accent);
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.preview-chamber {
+    margin-top: auto;
+    flex-shrink: 0;
+    height: clamp(220px, 30vh, 280px);
     position: relative;
-    color: var(--text-primary);
-    padding: 30px;
-    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
-    box-shadow: 
-        0 20px 40px var(--shadow-dark),
-        inset 0 2px 0 rgba(255, 255, 255, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 3px solid rgba(0, 225, 255, 0.2);
+    background: var(--dynamic-bg, radial-gradient(ellipse at 50% 100%, #0a0f1c 0%, #020508 70%));
+    transition: background 1.2s ease, height 0.4s ease;
 }
 
-.medicine-item::before {
+.preview-chamber::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg, 
-        transparent 0%, 
-        rgba(129, 230, 217, 0.15) 50%, 
-        transparent 100%
-    );
-    transition: left 1s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 0;
-}
-
-.medicine-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(129, 230, 217, 0.05) 0%, 
-        rgba(246, 224, 94, 0.03) 50%, 
-        rgba(79, 209, 197, 0.05) 100%);
-    border-radius: 50px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 0;
-}
-
-.medicine-item.active::before,
-.medicine-item:hover::before {
-    left: 100%;
-}
-
-.medicine-item.active::after,
-.medicine-item:hover::after {
-    opacity: 1;
-}
-
-.medicine-item.active,
-.medicine-item:hover {
-    transform: scale(1.08) translateY(-8px);
-    border-color: var(--primary-color);
-    box-shadow: 
-        0 35px 70px var(--shadow-dark),
-        0 0 0 2px var(--primary-color),
-        0 0 60px var(--glow-primary),
-        inset 0 2px 0 rgba(255, 255, 255, 0.25);
-}
-
-.medicine-item > * {
-    position: relative;
+    inset: 0;
+    background: var(--dynamic-bg);
+    transition: opacity 1s ease;
     z-index: 1;
 }
 
-.medicine-item-name {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    font-size: 1.4rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 15px;
-    line-height: 1.2;
-    text-shadow: 0 0 25px var(--glow-primary);
-    transition: all 0.4s ease;
+.preview-chamber.active::before {
+    opacity: 1;
 }
 
-.medicine-item:hover .medicine-item-name {
-    transform: scale(1.05);
+.preview-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    transition: all var(--transition-smooth);
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 clamp(20px, 5vw, 50px);
 }
 
-.medicine-item-info {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    margin-bottom: 12px;
-    line-height: 1.4;
+.preview-content.hidden {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    pointer-events: none;
+}
+
+.preview-default,
+.preview-active {
+    position: absolute;
+}
+
+.preview-active.hidden {
+    visibility: hidden;
+}
+
+.preview-default h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--color-text-dim);
+    letter-spacing: 4px;
     font-weight: 400;
-    transition: all 0.4s ease;
+    text-shadow: 0 0 25px rgba(0, 225, 255, 0.2);
+    animation: standbyPulse 3s ease-in-out infinite;
 }
 
-.medicine-item:hover .medicine-item-info {
-    color: var(--text-primary);
+@keyframes standbyPulse {
+    0%,
+    100% {
+        opacity: 0.6;
+        text-shadow: 0 0 25px rgba(0, 225, 255, 0.2);
+    }
+    50% {
+        opacity: 0.9;
+        text-shadow: 0 0 35px rgba(0, 225, 255, 0.4);
+    }
 }
 
-.medicine-item-info strong {
-    color: var(--text-primary);
+.preview-name {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.2rem, 7vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: 2px;
+    text-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--glow-primary);
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.preview-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(15px, 2vw, 25px) clamp(20px, 4vw, 50px);
+    margin-top: clamp(15px, 3vw, 25px);
+    text-align: left;
+}
+
+.preview-info {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+
+.preview-info strong {
+    color: var(--color-text-primary);
+    text-shadow: 0 0 10px var(--glow-primary);
+}
+
+.preview-price-wrapper {
+    text-align: right;
+}
+
+.preview-price-label {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
     font-weight: 600;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
 }
 
-.medicine-item-price {
-    font-size: 1.8rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-top: 20px;
-    text-shadow: 0 0 30px var(--glow-accent);
-    transition: all 0.4s ease;
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.medicine-item:hover .medicine-item-price {
-    transform: scale(1.1);
-    filter: brightness(1.3);
-}
-
-@media (max-width: 1200px) {
-    .container { padding: 20px 35px; }
-    .header h1 { font-size: 2.8rem; }
-    .medicine-item { width: 260px; height: 260px; padding: 25px; }
-    .medicine-item-name { font-size: 1.3rem; }
-    .medicine-item-price { font-size: 1.7rem; }
+.preview-price {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 7vw, 4rem);
+    font-weight: 900;
+    color: var(--color-accent);
+    text-shadow: 0 0 30px var(--glow-accent), 0 0 60px rgba(255, 219, 112, 0.3);
+    line-height: 1;
+    letter-spacing: 2px;
 }
 
 @media (max-width: 992px) {
-    .container { padding: 18px 30px; }
-    .header h1 { font-size: 2.5rem; }
-    .controls-wrapper { padding: 20px; }
-    .medicine-item { width: 240px; height: 240px; padding: 22px; }
-    .medicine-item-name { font-size: 1.2rem; }
-    .medicine-item-price { font-size: 1.6rem; }
-}
-
-@media (max-width: 768px) {
-    .container { padding: 15px 25px; }
-    .header h1 { font-size: 2.2rem; }
-    .controls-wrapper { padding: 18px; margin-bottom: 20px; }
-    .search-input { width: 95%; font-size: 1rem; padding: 14px 28px; }
-    .filter-select, .reset-filters { font-size: 0.9rem; padding: 12px 20px; }
-    .scroll-button { display: none; }
-    .medicine-list { gap: 20px; padding: 15px 10px; }
-    .medicine-item { width: 220px; height: 220px; border-radius: 40px; padding: 20px; }
-    .medicine-item-name { font-size: 1.1rem; }
-    .medicine-item-info { font-size: 0.9rem; }
-    .medicine-item-price { font-size: 1.5rem; }
-}
-
-@media (max-width: 576px) {
-    .header h1 { font-size: 1.9rem; }
-    .search-input { width: 100%; }
-    .filter-bar { flex-direction: column; align-items: stretch; gap: 15px; }
-    .filter-select, .reset-filters { width: 100%; }
-    .medicine-list { gap: 18px; }
-    .medicine-item { 
-        width: calc(100% - 20px); 
-        height: 200px; 
-        border-radius: 35px; 
-        margin: 0 10px; 
+    .header-and-search {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
     }
-    .medicine-item-name { font-size: 1rem; }
-    .medicine-item-price { font-size: 1.4rem; }
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
+    .filter-wrapper {
+        flex-direction: column;
+        gap: 15px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .preview-details-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+    .preview-price-wrapper {
+        text-align: center;
     }
 }
 
-.medicine-item {
-    animation: slideInUp 0.6s ease-out;
-    animation-fill-mode: both;
+@media (max-height: 500px) and (orientation: landscape) {
+    .hud-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .hud-controls {
+        padding: 15px;
+    }
+    .header-and-search {
+        grid-template-columns: 200px 1fr;
+        margin-bottom: 10px;
+    }
+    .filter-wrapper {
+        flex-direction: row;
+        gap: 10px;
+    }
+    .preview-chamber {
+        height: 180px;
+    }
+    .item-card {
+        height: 160px;
+    }
+    .preview-name,
+    .preview-price {
+        font-size: 2rem;
+    }
+    .preview-info,
+    .preview-price-label {
+        font-size: 0.9rem;
+    }
+    #status-bar {
+        min-height: 0;
+        margin-top: 10px;
+    }
 }
-
-.medicine-item:nth-child(1) { animation-delay: 0.1s; }
-.medicine-item:nth-child(2) { animation-delay: 0.15s; }
-.medicine-item:nth-child(3) { animation-delay: 0.2s; }
-.medicine-item:nth-child(4) { animation-delay: 0.25s; }
-.medicine-item:nth-child(5) { animation-delay: 0.3s; }
 </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Lx Search p1</h1>
-        </div>
-
-        <div class="controls-wrapper">
-            <div class="search-bar">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search medicines...">
+    <div class="app-container">
+        <header class="hud-container">
+            <div class="hud-controls">
+                <div class="header-and-search">
+                    <div class="header"><h1>Lx Search P1.2</h1></div>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Initiate search protocol...">
+                </div>
+                <div class="filter-wrapper">
+                    <select class="filter-select" id="unitFilter"><option value="">All Units</option></select>
+                    <select class="filter-select" id="companyFilter"><option value="">All Companies</option></select>
+                    <button class="reset-button" id="resetFilters"><i class="fas fa-power-off"></i> Reset</button>
+                </div>
+                <div id="status-bar">
+                    <div id="suggestionsArea" class="suggestions-area"></div>
+                    <div id="filterTagsContainer" class="filter-tags-container"></div>
+                </div>
             </div>
-            <div class="filter-bar">
-                <select class="filter-select" id="unitFilter">
-                    <option value="">All Units</option>
-                </select>
-                <select class="filter-select" id="companyFilter">
-                    <option value="">All Companies</option>
-                </select>
-                <button class="reset-filters" id="resetFilters"><i class="fas fa-sync-alt"></i> Reset Filters</button>
-            </div>
-            <div class="filter-indicators" id="filterIndicators"></div>
-        </div>
+        </header>
+        
+        <main class="scroll-container">
+            <div id="cardContainer"></div>
+            <button class="scroll-button scroll-left" aria-label="Scroll Left"><i class="fas fa-chevron-left"></i></button>
+            <button class="scroll-button scroll-right" aria-label="Scroll Right"><i class="fas fa-chevron-right"></i></button>
+        </main>
 
-        <div class="scroll-container">
-            <button class="scroll-button scroll-left"><i class="fas fa-chevron-left"></i></button>
-            <div class="medicine-list" id="medicineList">
+        <footer class="preview-chamber" id="previewChamber">
+            <div class="preview-content preview-default" id="previewDefault">
+                <h2>AWAITING SELECTION</h2>
             </div>
-            <button class="scroll-button scroll-right"><i class="fas fa-chevron-right"></i></button>
-        </div>
-
+            <div class="preview-content preview-active hidden" id="previewActive">
+                <h2 class="preview-name" id="previewName"></h2>
+                <div class="preview-details-grid">
+                    <div class="preview-info" id="previewInfo"></div>
+                    <div class="preview-price-wrapper">
+                        <div class="preview-price-label">Price</div>
+                        <div class="preview-price" id="previewPrice"></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-</body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const setAppHeight = () => {
+        const doc = document.documentElement;
+        doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+    };
+    window.addEventListener('resize', setAppHeight);
+    setAppHeight();
 
-    <script>
-        const medicines = [
-            {name: "Amaryl 1", unit: "30 Tab", price: 11.5, company: "شراء موحد"},
-            {name: "Amaryl 2", unit: "30 Tab", price: 27, company: "شراء موحد"},
-            {name: "Amaryl 3", unit: "30 Tab", price: 30, company: "شراء موحد"},
-            {name: "Amaryl 4", unit: "30 Tab", price: 37.5, company: "شراء موحد"},
-            {name: "Amaryl M", unit: "30 Tab", price: 26.5, company: "شراء موحد"},
-            {name: "Apidra قوي عاملة", unit: "Penfill", price: 44, company: "شراء موحد"},
-            {name: "Apidra طلاب", unit: "Penfill", price: 20, company: "شراء موحد"},
-            {name: "Atacand 16", unit: "14 Tab", price: 38.5, company: "شراء موحد"},
-            {name: "Atacand 16 plus", unit: "14 Tab", price: 42, company: "شراء موحد"},
-            {name: "Atacand 8", unit: "14 Tab", price: 27, company: "شراء موحد"},
-            {name: "Atozet 10 / 10", unit: "10 Tab", price: 96, company: "شراء موحد"},
-            {name: "Atozet 20 / 10", unit: "10 Tab", price: 110, company: "شراء موحد"},
-            {name: "Brilique 60", unit: "56 Tab", price: 100, company: "ايرادات هيئة"},
-            {name: "Brilique 90", unit: "56 Tab", price: 100, company: "ايرادات هيئة"},
-            {name: "Campto", unit: "Vial", price: 60, company: "شراء موحد"},
-            {name: "Cardura 1", unit: "21 Tab", price: 23, company: "شراء موحد"},
-            {name: "Cardura 4", unit: "14 Tab", price: 31, company: "شراء موحد"},
-            {name: "Carnvita forte", unit: "30 Tab", price: 20, company: "شراء موحد"},
-            {name: "Celebrex 200", unit: "10 Tab", price: 51.5, company: "شراء موحد"},
-            {name: "Concor 2.5", unit: "30 Tab", price: 10, company: "شراء موحد"},
-            {name: "Concor 5", unit: "30 Tab", price: 26, company: "شراء موحد"},
-            {name: "Cosopt", unit: "Bottle", price: 52, company: "شراء موحد"},
-            {name: "Coveram 10 /10", unit: "15 Tab", price: 65, company: "شراء موحد"},
-            {name: "Coveram 5 / 5", unit: "15 Tab", price: 48, company: "شراء موحد"},
-            {name: "Coversyl 10 plus", unit: "15 Tab", price: 20, company: "شراء موحد"},
-            {name: "Coversyl 5", unit: "30 Tab", price: 53, company: "شراء موحد"},
-            {name: "Coversyl 5 plus", unit: "15 Tab", price: 30.5, company: "شراء موحد"},
-            {name: "Cozaar 50", unit: "7 Tab", price: 22.25, company: "شراء موحد"},
-            {name: "Crestor 10", unit: "28 Tab", price: 118, company: "شراء موحد"},
-            {name: "Crestor 20", unit: "14 Tab", price: 96, company: "شراء موحد"},
-            {name: "Crestor 5", unit: "7 Tab", price: 18, company: "شراء موحد"},
-            {name: "Daflon 500", unit: "30 Tab", price: 30, company: "شراء موحد"},
-            {name: "Daivobet", unit: "Tube", price: 20, company: "شراء موحد"},
-            {name: "Depakine Ch 500", unit: "30 Tab", price: 45, company: "شراء موحد"},
-            {name: "Depakine Syrup", unit: "Bottle", price: 16, company: "شراء موحد"},
-            {name: "Diamicron 30 Mr", unit: "30 Tab", price: 16, company: "شراء موحد"},
-            {name: "Diamicron 60 Mr", unit: "30 Tab", price: 20, company: "شراء موحد"},
-            {name: "Diamicron 80", unit: "20 Tab", price: 9, company: "شراء موحد"},
-            {name: "Dorofen", unit: "30 Cap", price: 10, company: "شراء موحد"},
-            {name: "Dostinex", unit: "2 Tab", price: 54.25, company: "شراء موحد"},
-            {name: "Eliquis 2.5", unit: "20 Tab", price: 50, company: "ايرادات هيئة"},
-            {name: "Eliquis 5", unit: "20 Tab", price: 50, company: "ايرادات هيئة"},
-            {name: "Eloxatin 100", unit: "Vial", price: 800, company: "شراء موحد"},
-            {name: "Eloxatin 50", unit: "Vial", price: 500, company: "شراء موحد"},
-            {name: "Entresto 100", unit: "28 Tab", price: 50, company: "ايرادات هيئة"},
-            {name: "Entresto 200", unit: "28 Tab", price: 50, company: "ايرادات هيئة"},
-            {name: "Entresto 50", unit: "28 Tab", price: 50, company: "ايرادات هيئة"},
-            {name: "Etodolac 600", unit: "10 Tab", price: 15.5, company: "شراء موحد"},
-            {name: "Exforge Hct 160 / 10 / 25", unit: "14 Tab", price: 70.5, company: "شراء موحد"},
-            {name: "Exforge Hct 160 / 5 /12.5", unit: "14 Tab", price: 73.5, company: "شراء موحد"},
-            {name: "Femara 2.5", unit: "30 Tab", price: 52.59, company: "شراء موحد"},
-            {name: "Flagyl 250", unit: "20 Tab", price: 5.5, company: "شراء موحد"},
-            {name: "Foradil", unit: "30 Cap", price: 75, company: "شراء موحد"},
-            {name: "Forxiga 10", unit: "28 Tab", price: 222, company: "شراء موحد"},
-            {name: "Forxiga 5", unit: "28 Tab", price: 234, company: "شراء موحد"},
-            {name: "Galvus 50", unit: "28 Tab", price: 65, company: "شراء موحد"},
-            {name: "Galvus Met 50 / 1000", unit: "30 Tab", price: 86.5, company: "شراء موحد"},
-            {name: "Galvus Met 50 / 850", unit: "30 Tab", price: 79.5, company: "شراء موحد"},
-            {name: "Genuphil", unit: "50 Tab", price: 20, company: "شراء موحد"},
-            {name: "Glucophage 1000", unit: "30 Tab", price: 12.5, company: "شراء موحد"},
-            {name: "Glucophage 500", unit: "50 Tab", price: 14.5, company: "شراء موحد"},
-            {name: "Glucophage Xr 1000", unit: "30 Tab", price: 42.5, company: "شراء موحد"},
-            {name: "Glucovance 5 / 500", unit: "30 Tab", price: 26.5, company: "شراء موحد"},
-            {name: "Glucovance 5 /1000", unit: "30 Tab", price: 20, company: "شراء موحد"},
-            {name: "Humalog 100 pen قوي عاملة", unit: "Pen", price: 52.87, company: "شراء موحد"},
-            {name: "Humalog 100 penfill قوي عاملة", unit: "Penfill", price: 48, company: "شراء موحد"},
-            {name: "Humalog Mix 25 قوي عاملة", unit: "Pen", price: 60, company: "شراء موحد"},
-            {name: "Humalog Mix 25 طلاب", unit: "Pen", price: 20, company: "شراء موحد"},
-            {name: "Humalog Mix 50 قوي عاملة", unit: "Pen", price: 60, company: "شراء موحد"},
-            {name: "Humalog Mix 50 طلاب", unit: "Pen", price: 20, company: "شراء موحد"},
-            {name: "Hyzaar 50", unit: "7 Tab", price: 22, company: "شراء موحد"},
-            {name: "Isoptin 80", unit: "30 Tab", price: 6.5, company: "شراء موحد"},
-            {name: "Januvia 100", unit: "28 Tab", price: 193, company: "شراء موحد"},
-            {name: "Januvia 50", unit: "28 Tab", price: 165, company: "شراء موحد"},
-            {name: "Jaunamet 50 / 1000", unit: "56 Tab", price: 195, company: "شراء موحد"},
-            {name: "Jaunamet 50 / 500", unit: "56 Tab", price: 204, company: "شراء موحد"},
-            {name: "Jaunamet 50 / 850", unit: "56 Tab", price: 175, company: "شراء موحد"},
-            {name: "Lasilactone 50 / 20", unit: "30 Tab", price: 8, company: "شراء موحد"},
-            {name: "Lantus", unit: "Penfill", price: 20, company: "ايرادات هيئة"},
-            {name: "Lasix 40", unit: "24 Tab", price: 9, company: "شراء موحد"},
-            {name: "Lipanthyl 300", unit: "30 Tab", price: 26, company: "شراء موحد"},
-            {name: "Lipitor 10", unit: "7 Tab", price: 28.5, company: "شراء موحد"},
-            {name: "Lipitor 20", unit: "7 Tab", price: 32, company: "شراء موحد"},
-            {name: "Lipitor 40", unit: "7 Tab", price: 46.5, company: "شراء موحد"},
-            {name: "Lipiror 80", unit: "7 Tab", price: 51, company: "شراء موحد"},
-            {name: "Lustral 50", unit: "7 Tab", price: 26.5, company: "شراء موحد"},
-            {name: "Mena Q", unit: "20 Cap", price: 37, company: "شراء موحد"},
-            {name: "Methyltechno", unit: "30 Film", price: 12, company: "شراء موحد"},
-            {name: "Natrilix Sr", unit: "30 Tab", price: 16, company: "شراء موحد"},
-            {name: "Natrixam 1.5 / 10", unit: "28 Tab", price: 43, company: "شراء موحد"},
-            {name: "Natrixam 1.5 / 5", unit: "28 Tab", price: 43, company: "شراء موحد"},
-            {name: "Nebicard 5", unit: "14 Tab", price: 13, company: "شراء موحد"},
-            {name: "Nexium 20", unit: "28 Tab", price: 140, company: "شراء موحد"},
-            {name: "Norditropine", unit: "Pen", price: 30, company: "شراء موحد"},
-            {name: "Norvasc 10", unit: "10 Tab", price: 25.5, company: "شراء موحد"},
-            {name: "Norvasc 5", unit: "10 Tab", price: 23.5, company: "شراء موحد"},
-            {name: "Novomix 30 Mix قوي عاملة", unit: "Pen", price: 60, company: "شراء موحد"},
-            {name: "Novomix 30 Mix طلاب", unit: "Pen", price: 20, company: "شراء موحد"},
-            {name: "Novomix 50 Mix قوي عاملة", unit: "Pen", price: 60, company: "شراء موحد"},
-            {name: "Novomix 50 Mix طلاب", unit: "Pen", price: 20, company: "شراء موحد"},
-            {name: "Novorapid قوي عاملة", unit: "Penfill", price: 39.5, company: "شراء موحد"},
-            {name: "Novorapid طلاب", unit: "Penfill", price: 20, company: "شراء موحد"},
-            {name: "Orthoglobe", unit: "30 Tab", price: 10, company: "شراء موحد"},
-            {name: "Plavix 75", unit: "28 Tab", price: 40, company: "ايرادات هيئة"},
-            {name: "Plendil 5", unit: "30 Tab", price: 33, company: "شراء موحد"},
-            {name: "Pletaal 100", unit: "20 Tab", price: 64, company: "شراء موحد"},
-            {name: "Pletaal 50", unit: "20 Tab", price: 44.5, company: "شراء موحد"},
-            {name: "Procorolan 5", unit: "28 Tab", price: 50, company: "شراء موحد"},
-            {name: "Procorolan 7.5", unit: "28 Tab", price: 50, company: "شراء موحد"},
-            {name: "Ryzodec", unit: "Pen", price: 100, company: "شراء موحد"},
-            {name: "Singulair 10", unit: "14 Tab", price: 84.5, company: "شراء موحد"},
-            {name: "Singulair 5", unit: "14 Tab", price: 77.75, company: "شراء موحد"},
-            {name: "Soliqua 100 / 33", unit: "Pen", price: 162, company: "شراء موحد"},
-            {name: "Soliqua 100 / 50", unit: "Pen", price: 287, company: "شراء موحد"},
-            {name: "Tareg 40", unit: "15 Tab", price: 49, company: "شراء موحد"},
-            {name: "Tarolimus", unit: "Tube", price: 15, company: "شراء موحد"},
-            {name: "Taxoter 20", unit: "Vial", price: 240, company: "شراء موحد"},
-            {name: "Taxoter 80", unit: "Vial", price: 860, company: "شراء موحد"},
-            {name: "Tegretol 200", unit: "30 Tab", price: 13, company: "شراء موحد"},
-            {name: "Tegretol 200 Cr", unit: "20 Tab", price: 7.5, company: "شراء موحد"},
-            {name: "Tegretol 400 Cr", unit: "20 Tab", price: 9, company: "شراء موحد"},
-            {name: "Tenormin 100", unit: "14 Tab", price: 9.5, company: "شراء موحد"},
-            {name: "Tenormin 50", unit: "14 Tab", price: 7.25, company: "شراء موحد"},
-            {name: "Tentavair 160", unit: "Spray", price: 27, company: "شراء موحد"},
-            {name: "Toujeo قوي عاملة", unit: "Pen", price: 50, company: "شراء موحد"},
-            {name: "Toujeo طلاب", unit: "Pen", price: 15, company: "شراء موحد"},
-            {name: "Tresiba قوي عاملة", unit: "Pen", price: 70, company: "شراء موحد"},
-            {name: "Tresiba طلاب", unit: "Pen", price: 25, company: "شراء موحد"},
-            {name: "Trilepital 300", unit: "50 Tab", price: 116.25, company: "شراء موحد"},
-            {name: "Tritace 2.5", unit: "14 Tab", price: 14.5, company: "شراء موحد"},
-            {name: "Tritace 5", unit: "14 Tab", price: 19, company: "شراء موحد"},
-            {name: "Tritace comp 5 / 25", unit: "14 Tab", price: 27, company: "شراء موحد"},
-            {name: "Tritace Comp Ls 2.5 / 12.5", unit: "14 Tab", price: 18, company: "شراء موحد"},
-            {name: "Tritace Protect 10", unit: "20 Tab", price: 29, company: "شراء موحد"},
-            {name: "Trivastal", unit: "30 Tab", price: 27.25, company: "شراء موحد"},
-            {name: "Vastarel Mr", unit: "30 Tab", price: 48.5, company: "شراء موحد"},
-            {name: "Xarelto 10", unit: "10 Tab", price: 50, company: "ايرادات هيئة"},
-            {name: "Xarelto 15", unit: "42 Tab", price: 210, company: "ايرادات هيئة"},
-            {name: "Xarelto 20", unit: "28 Tab", price: 140, company: "ايرادات هيئة"},
-            {name: "Xigduo 5 /1000", unit: "56 Tab", price: 98.5, company: "شراء موحد"},
-            {name: "Zestril 5", unit: "10 Tab", price: 6.25, company: "شراء موحد"},
-            {name: "Zestril 10", unit: "10 Tab", price: 7.5, company: "شراء موحد"},
-            {name: "Zestril 20", unit: "10 Tab", price: 8.5, company: "شراء موحد"},
-            {name: "Zocor 10", unit: "7 Tab", price: 22.75, company: "شراء موحد"},
-            {name: "Zocor 20", unit: "14 Tab", price: 60.5, company: "شراء موحد"},
-            {name: "Zocor 40", unit: "14 Tab", price: 57, company: "شراء موحد"}
-        ];
-        const medicineListEl = document.getElementById('medicineList');
-        const unitFilterEl = document.getElementById('unitFilter');
-        const companyFilterEl = document.getElementById('companyFilter');
-        const searchInputEl = document.getElementById('searchInput');
-        const scrollLeftBtn = document.querySelector('.scroll-left');
-        const scrollRightBtn = document.querySelector('.scroll-right');
-        const resetFiltersButtonEl = document.getElementById('resetFilters');
-        let lastHoveredItem = null;
+    const medicines = [
+        {name: "Amaryl 1", unit: "30 Tab", price: 11.5, company: "شراء موحد"}, {name: "Amaryl 2", unit: "30 Tab", price: 27, company: "شراء موحد"}, {name: "Amaryl 3", unit: "30 Tab", price: 30, company: "شراء موحد"}, {name: "Amaryl 4", unit: "30 Tab", price: 37.5, company: "شراء موحد"}, {name: "Amaryl M", unit: "30 Tab", price: 26.5, company: "شراء موحد"}, {name: "Apidra قوي عاملة", unit: "Penfill", price: 44, company: "شراء موحد"}, {name: "Apidra طلاب", unit: "Penfill", price: 20, company: "شراء موحد"}, {name: "Atacand 16", unit: "14 Tab", price: 38.5, company: "شراء موحد"}, {name: "Atacand 16 plus", unit: "14 Tab", price: 42, company: "شراء موحد"}, {name: "Atacand 8", unit: "14 Tab", price: 27, company: "شراء موحد"}, {name: "Atozet 10 / 10", unit: "10 Tab", price: 96, company: "شراء موحد"}, {name: "Atozet 20 / 10", unit: "10 Tab", price: 110, company: "شراء موحد"}, {name: "Brilique 60", unit: "56 Tab", price: 100, company: "ايرادات هيئة"}, {name: "Brilique 90", unit: "56 Tab", price: 100, company: "ايرادات هيئة"}, {name: "Campto", unit: "Vial", price: 60, company: "شراء موحد"}, {name: "Cardura 1", unit: "21 Tab", price: 23, company: "شراء موحد"}, {name: "Cardura 4", unit: "14 Tab", price: 31, company: "شراء موحد"}, {name: "Carnvita forte", unit: "30 Tab", price: 20, company: "شراء موحد"}, {name: "Celebrex 200", unit: "10 Tab", price: 51.5, company: "شراء موحد"}, {name: "Concor 2.5", unit: "30 Tab", price: 10, company: "شراء موحد"}, {name: "Concor 5", unit: "30 Tab", price: 26, company: "شراء موحد"}, {name: "Cosopt", unit: "Bottle", price: 52, company: "شراء موحد"}, {name: "Coveram 10 /10", unit: "15 Tab", price: 65, company: "شراء موحد"}, {name: "Coveram 5 / 5", unit: "15 Tab", price: 48, company: "شراء موحد"}, {name: "Coversyl 10 plus", unit: "15 Tab", price: 20, company: "شراء موحد"}, {name: "Coversyl 5", unit: "30 Tab", price: 53, company: "شراء موحد"}, {name: "Coversyl 5 plus", unit: "15 Tab", price: 30.5, company: "شراء موحد"}, {name: "Cozaar 50", unit: "7 Tab", price: 22.25, company: "شراء موحد"}, {name: "Crestor 10", unit: "28 Tab", price: 118, company: "شراء موحد"}, {name: "Crestor 20", unit: "14 Tab", price: 96, company: "شراء موحد"}, {name: "Crestor 5", unit: "7 Tab", price: 18, company: "شراء موحد"}, {name: "Daflon 500", unit: "30 Tab", price: 30, company: "شراء موحد"}, {name: "Daivobet", unit: "Tube", price: 20, company: "شراء موحد"}, {name: "Depakine Ch 500", unit: "30 Tab", price: 45, company: "شراء موحد"}, {name: "Depakine Syrup", unit: "Bottle", price: 16, company: "شراء موحد"}, {name: "Diamicron 30 Mr", unit: "30 Tab", price: 16, company: "شراء موحد"}, {name: "Diamicron 60 Mr", unit: "30 Tab", price: 20, company: "شراء موحد"}, {name: "Diamicron 80", unit: "20 Tab", price: 9, company: "شراء موحد"}, {name: "Dorofen", unit: "30 Cap", price: 10, company: "شراء موحد"}, {name: "Dostinex", unit: "2 Tab", price: 54.25, company: "شراء موحد"}, {name: "Eliquis 2.5", unit: "20 Tab", price: 50, company: "ايرادات هيئة"}, {name: "Eliquis 5", unit: "20 Tab", price: 50, company: "ايرادات هيئة"}, {name: "Eloxatin 100", unit: "Vial", price: 800, company: "شراء موحد"}, {name: "Eloxatin 50", unit: "Vial", price: 500, company: "شراء موحد"}, {name: "Entresto 100", unit: "28 Tab", price: 50, company: "ايرادات هيئة"}, {name: "Entresto 200", unit: "28 Tab", price: 50, company: "ايرادات هيئة"}, {name: "Entresto 50", unit: "28 Tab", price: 50, company: "ايرادات هيئة"}, {name: "Etodolac 600", unit: "10 Tab", price: 15.5, company: "شراء موحد"}, {name: "Exforge Hct 160 / 10 / 25", unit: "14 Tab", price: 70.5, company: "شراء موحد"}, {name: "Exforge Hct 160 / 5 /12.5", unit: "14 Tab", price: 73.5, company: "شراء موحد"}, {name: "Femara 2.5", unit: "30 Tab", price: 52.59, company: "شراء موحد"}, {name: "Flagyl 250", unit: "20 Tab", price: 5.5, company: "شراء موحد"}, {name: "Foradil", unit: "30 Cap", price: 75, company: "شراء موحد"}, {name: "Forxiga 10", unit: "28 Tab", price: 222, company: "شراء موحد"}, {name: "Forxiga 5", unit: "28 Tab", price: 234, company: "شراء موحد"}, {name: "Galvus 50", unit: "28 Tab", price: 65, company: "شراء موحد"}, {name: "Galvus Met 50 / 1000", unit: "30 Tab", price: 86.5, company: "شراء موحد"}, {name: "Galvus Met 50 / 850", unit: "30 Tab", price: 79.5, company: "شراء موحد"}, {name: "Genuphil", unit: "50 Tab", price: 20, company: "شراء موحد"}, {name: "Glucophage 1000", unit: "30 Tab", price: 12.5, company: "شراء موحد"}, {name: "Glucophage 500", unit: "50 Tab", price: 14.5, company: "شراء موحد"}, {name: "Glucophage Xr 1000", unit: "30 Tab", price: 42.5, company: "شراء موحد"}, {name: "Glucovance 5 / 500", unit: "30 Tab", price: 26.5, company: "شراء موحد"}, {name: "Glucovance 5 /1000", unit: "30 Tab", price: 20, company: "شراء موحد"}, {name: "Humalog 100 pen قوي عاملة", unit: "Pen", price: 52.87, company: "شراء موحد"}, {name: "Humalog 100 penfill قوي عاملة", unit: "Penfill", price: 48, company: "شراء موحد"}, {name: "Humalog Mix 25 قوي عاملة", unit: "Pen", price: 60, company: "شراء موحد"}, {name: "Humalog Mix 25 طلاب", unit: "Pen", price: 20, company: "شراء موحد"}, {name: "Humalog Mix 50 قوي عاملة", unit: "Pen", price: 60, company: "شراء موحد"}, {name: "Humalog Mix 50 طلاب", unit: "Pen", price: 20, company: "شراء موحد"}, {name: "Hyzaar 50", unit: "7 Tab", price: 22, company: "شراء موحد"}, {name: "Isoptin 80", unit: "30 Tab", price: 6.5, company: "شراء موحد"}, {name: "Januvia 100", unit: "28 Tab", price: 193, company: "شراء موحد"}, {name: "Januvia 50", unit: "28 Tab", price: 165, company: "شراء موحد"}, {name: "Jaunamet 50 / 1000", unit: "56 Tab", price: 195, company: "شراء موحد"}, {name: "Jaunamet 50 / 500", unit: "56 Tab", price: 204, company: "شراء موحد"}, {name: "Jaunamet 50 / 850", unit: "56 Tab", price: 175, company: "شراء موحد"}, {name: "Lasilactone 50 / 20", unit: "30 Tab", price: 8, company: "شراء موحد"}, {name: "Lantus", unit: "Penfill", price: 20, company: "ايرادات هيئة"}, {name: "Lasix 40", unit: "24 Tab", price: 9, company: "شراء موحد"}, {name: "Lipanthyl 300", unit: "30 Tab", price: 26, company: "شراء موحد"}, {name: "Lipitor 10", unit: "7 Tab", price: 28.5, company: "شراء موحد"}, {name: "Lipitor 20", unit: "7 Tab", price: 32, company: "شراء موحد"}, {name: "Lipitor 40", unit: "7 Tab", price: 46.5, company: "شراء موحد"}, {name: "Lipiror 80", unit: "7 Tab", price: 51, company: "شراء موحد"}, {name: "Lustral 50", unit: "7 Tab", price: 26.5, company: "شراء موحد"}, {name: "Mena Q", unit: "20 Cap", price: 37, company: "شراء موحد"}, {name: "Methyltechno", unit: "30 Film", price: 12, company: "شراء موحد"}, {name: "Natrilix Sr", unit: "30 Tab", price: 16, company: "شراء موحد"}, {name: "Natrixam 1.5 / 10", unit: "28 Tab", price: 43, company: "شراء موحد"}, {name: "Natrixam 1.5 / 5", unit: "28 Tab", price: 43, company: "شراء موحد"}, {name: "Nebicard 5", unit: "14 Tab", price: 13, company: "شراء موحد"}, {name: "Nexium 20", unit: "28 Tab", price: 140, company: "شراء موحد"}, {name: "Norditropine", unit: "Pen", price: 30, company: "شراء موحد"}, {name: "Norvasc 10", unit: "10 Tab", price: 25.5, company: "شراء موحد"}, {name: "Norvasc 5", unit: "10 Tab", price: 23.5, company: "شراء موحد"}, {name: "Novomix 30 Mix قوي عاملة", unit: "Pen", price: 60, company: "شراء موحد"}, {name: "Novomix 30 Mix طلاب", unit: "Pen", price: 20, company: "شراء موحد"}, {name: "Novomix 50 Mix قوي عاملة", unit: "Pen", price: 60, company: "شراء موحد"}, {name: "Novomix 50 Mix طلاب", unit: "Pen", price: 20, company: "شراء موحد"}, {name: "Novorapid قوي عاملة", unit: "Penfill", price: 39.5, company: "شراء موحد"}, {name: "Novorapid طلاب", unit: "Penfill", price: 20, company: "شراء موحد"}, {name: "Orthoglobe", unit: "30 Tab", price: 10, company: "شراء موحد"}, {name: "Plavix 75", unit: "28 Tab", price: 40, company: "ايرادات هيئة"}, {name: "Plendil 5", unit: "30 Tab", price: 33, company: "شراء موحد"}, {name: "Pletaal 100", unit: "20 Tab", price: 64, company: "شراء موحد"}, {name: "Pletaal 50", unit: "20 Tab", price: 44.5, company: "شراء موحد"}, {name: "Procorolan 5", unit: "28 Tab", price: 50, company: "شراء موحد"}, {name: "Procorolan 7.5", unit: "28 Tab", price: 50, company: "شراء موحد"}, {name: "Ryzodec", unit: "Pen", price: 100, company: "شراء موحد"}, {name: "Singulair 10", unit: "14 Tab", price: 84.5, company: "شراء موحد"}, {name: "Singulair 5", unit: "14 Tab", price: 77.75, company: "شراء موحد"}, {name: "Soliqua 100 / 33", unit: "Pen", price: 162, company: "شراء موحد"}, {name: "Soliqua 100 / 50", unit: "Pen", price: 287, company: "شراء موحد"}, {name: "Tareg 40", unit: "15 Tab", price: 49, company: "شراء موحد"}, {name: "Tarolimus", unit: "Tube", price: 15, company: "شراء موحد"}, {name: "Taxoter 20", unit: "Vial", price: 240, company: "شراء موحد"}, {name: "Taxoter 80", unit: "Vial", price: 860, company: "شراء موحد"}, {name: "Tegretol 200", unit: "30 Tab", price: 13, company: "شراء موحد"}, {name: "Tegretol 200 Cr", unit: "20 Tab", price: 7.5, company: "شراء موحد"}, {name: "Tegretol 400 Cr", unit: "20 Tab", price: 9, company: "شراء موحد"}, {name: "Tenormin 100", unit: "14 Tab", price: 9.5, company: "شراء موحد"}, {name: "Tenormin 50", unit: "14 Tab", price: 7.25, company: "شراء موحد"}, {name: "Tentavair 160", unit: "Spray", price: 27, company: "شراء موحد"}, {name: "Toujeo قوي عاملة", unit: "Pen", price: 50, company: "شراء موحد"}, {name: "Toujeo طلاب", unit: "Pen", price: 15, company: "شراء موحد"}, {name: "Tresiba قوي عاملة", unit: "Pen", price: 70, company: "شراء موحد"}, {name: "Tresiba طلاب", unit: "Pen", price: 25, company: "شراء موحد"}, {name: "Trilepital 300", unit: "50 Tab", price: 116.25, company: "شراء موحد"}, {name: "Tritace 2.5", unit: "14 Tab", price: 14.5, company: "شراء موحد"}, {name: "Tritace 5", unit: "14 Tab", price: 19, company: "شراء موحد"}, {name: "Tritace comp 5 / 25", unit: "14 Tab", price: 27, company: "شراء موحد"}, {name: "Tritace Comp Ls 2.5 / 12.5", unit: "14 Tab", price: 18, company: "شراء موحد"}, {name: "Tritace Protect 10", unit: "20 Tab", price: 29, company: "شراء موحد"}, {name: "Trivastal", unit: "30 Tab", price: 27.25, company: "شراء موحد"}, {name: "Vastarel Mr", unit: "30 Tab", price: 48.5, company: "شراء موحد"}, {name: "Xarelto 10", unit: "10 Tab", price: 50, company: "ايرادات هيئة"}, {name: "Xarelto 15", unit: "42 Tab", price: 210, company: "ايرادات هيئة"}, {name: "Xarelto 20", unit: "28 Tab", price: 140, company: "ايرادات هيئة"}, {name: "Xigduo 5 /1000", unit: "56 Tab", price: 98.5, company: "شراء موحد"}, {name: "Zestril 5", unit: "10 Tab", price: 6.25, company: "شراء موحد"}, {name: "Zestril 10", unit: "10 Tab", price: 7.5, company: "شراء موحد"}, {name: "Zestril 20", unit: "10 Tab", price: 8.5, company: "شراء موحد"}, {name: "Zocor 10", unit: "7 Tab", price: 22.75, company: "شراء موحد"}, {name: "Zocor 20", unit: "14 Tab", price: 60.5, company: "شراء موحد"}, {name: "Zocor 40", unit: "14 Tab", price: 57, company: "شراء موحد"}
+    ];
+    
+    const elements = {
+        cardContainer: document.getElementById('cardContainer'),
+        unitFilter: document.getElementById('unitFilter'),
+        companyFilter: document.getElementById('companyFilter'),
+        searchInput: document.getElementById('searchInput'),
+        suggestionsArea: document.getElementById('suggestionsArea'),
+        filterTagsContainer: document.getElementById('filterTagsContainer'),
+        resetFiltersBtn: document.getElementById('resetFilters'),
+        scrollLeftBtn: document.querySelector('.scroll-left'),
+        scrollRightBtn: document.querySelector('.scroll-right'),
+        previewChamber: document.getElementById('previewChamber'),
+        previewDefault: document.getElementById('previewDefault'),
+        previewActive: document.getElementById('previewActive'),
+        previewName: document.getElementById('previewName'),
+        previewInfo: document.getElementById('previewInfo'),
+        previewPrice: document.getElementById('previewPrice'),
+    };
 
-        function createMedicineItem(medicine) {
-            const item = document.createElement('div');
-            item.className = 'medicine-item';
-            item.innerHTML = `
-                <div class="medicine-item-name">${medicine.name}</div>
-                <p class="medicine-item-info"><strong>Unit:</strong> ${medicine.unit}</p>
-                <p class="medicine-item-info"><strong>Company:</strong> ${medicine.company}</p>
-                <p class="medicine-item-price">${medicine.price.toFixed(2)}</p>
-            `;
-            
-            item.addEventListener('mouseenter', () => {
-                if (lastHoveredItem && lastHoveredItem !== item) {
-                    lastHoveredItem.classList.remove('active');
-                }
-                item.classList.add('active');
-                lastHoveredItem = item;
-            });
-             item.addEventListener('mouseleave', () => {
-                 item.classList.remove('active');
-                 if(lastHoveredItem === item) {
-                    lastHoveredItem = null;
-                 }
-             });
+    const createCardElement = (medicine) => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+            <h3 class="card-name">${medicine.name}</h3>
+            <hr class="card-separator">
+            <div class="card-details">
+                <div class="card-info">
+                    <div class="info-row">
+                        <strong>Unit:</strong>
+                        <span>${medicine.unit}</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Source:</strong>
+                        <span>${medicine.company}</span>
+                    </div>
+                </div>
+                <div class="card-price">${medicine.price.toFixed(2)}</div>
+            </div>`;
+        card.addEventListener('mouseenter', () => updatePreview(medicine));
+        return card;
+    };
 
-            return item;
+    const renderCards = (filteredMedicines) => {
+        elements.cardContainer.innerHTML = '';
+        if (filteredMedicines.length > 0) {
+            filteredMedicines.forEach(med => elements.cardContainer.appendChild(createCardElement(med)));
+        } else {
+            elements.cardContainer.innerHTML = `<p style="font-family: var(--font-mono); color: var(--color-text-dim); text-align: center; width: 100%;">[ NO MATCHING DATA // CHECK FILTERS ]</p>`;
         }
+    };
 
-        function populateFilters() {
-            const units = [...new Set(medicines.map(m => m.unit))].sort();
-            const companies = [...new Set(medicines.map(m => m.company))].sort();
+    const updatePreview = (medicine) => {
+        elements.previewName.textContent = medicine.name;
+        elements.previewInfo.innerHTML = `<strong>Unit:</strong> ${medicine.unit}<br><strong>Source:</strong> ${medicine.company}`;
+        elements.previewPrice.textContent = medicine.price.toFixed(2);
+        
+        const hash = medicine.name.split('').reduce((acc, char) => char.charCodeAt(0) + ((acc << 5) - acc), 0);
+        const hue1 = (hash & 0xFF) % 360;
+        const hue2 = (hash >> 8 & 0xFF) % 360;
+        elements.previewChamber.style.setProperty('--dynamic-bg', `radial-gradient(ellipse at 70% 120%, hsl(${hue1}, 80%, 15%) 0%, transparent 60%), radial-gradient(ellipse at 30% 120%, hsl(${hue2}, 70%, 12%) 0%, transparent 60%)`);
+        
+        elements.previewChamber.classList.add('active');
+        elements.previewDefault.classList.add('hidden');
+        elements.previewActive.classList.remove('hidden');
+    };
 
-            unitFilterEl.innerHTML = '<option value="">All Units</option>';
-            companyFilterEl.innerHTML = '<option value="">All Companies</option>';
+    const resetPreview = () => {
+        elements.previewChamber.classList.remove('active');
+        elements.previewDefault.classList.remove('hidden');
+        elements.previewActive.classList.add('hidden');
+    };
 
-            units.forEach(unit => {
-                const option = document.createElement('option');
-                option.value = option.textContent = unit;
-                unitFilterEl.appendChild(option);
-            });
+    const populateFilters = () => {
+        const units = [...new Set(medicines.map(m => m.unit))].sort();
+        const companies = [...new Set(medicines.map(m => m.company))].sort();
+        units.forEach(unit => elements.unitFilter.innerHTML += `<option value="${unit}">${unit}</option>`);
+        companies.forEach(company => elements.companyFilter.innerHTML += `<option value="${company}">${company}</option>`);
+    };
 
-            companies.forEach(company => {
-                const option = document.createElement('option');
-                option.value = option.textContent = company;
-                companyFilterEl.appendChild(option);
+    const levenshteinDistance = (a, b) => {
+        if (!a || !b) return 100;
+        const matrix = Array(a.length + 1).fill(null).map(() => Array(b.length + 1).fill(null));
+        for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+        for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+        for (let i = 1; i <= a.length; i++) {
+            for (let j = 1; j <= b.length; j++) {
+                const cost = a[i - 1].toLowerCase() === b[j - 1].toLowerCase() ? 0 : 1;
+                matrix[i][j] = Math.min(matrix[i - 1][j] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j - 1] + cost);
+            }
+        }
+        return matrix[a.length][b.length];
+    };
+
+    const findSimilarTerms = (term, limit = 3) => {
+        if (!term || term.length < 3) return [];
+        return medicines
+            .map(med => ({ name: med.name, distance: levenshteinDistance(term, med.name.split(' ')[0]) }))
+            .filter(med => med.distance < 4 && med.name.toLowerCase() !== term.toLowerCase())
+            .sort((a, b) => a.distance - b.distance)
+            .map(med => med.name)
+            .filter((value, index, self) => self.indexOf(value) === index)
+            .slice(0, limit);
+    };
+
+    const displaySuggestions = (terms) => {
+        elements.suggestionsArea.innerHTML = '';
+        if (terms.length > 0) {
+            elements.suggestionsArea.innerHTML = '<strong>[Assist]:</strong>';
+            terms.forEach(term => {
+                const link = document.createElement('a');
+                link.textContent = term;
+                link.onclick = () => { elements.searchInput.value = term; applyFilters(); };
+                elements.suggestionsArea.appendChild(link);
             });
         }
+    };
 
-        function filterMedicines() {
-            const selectedUnit = unitFilterEl.value;
-            const selectedCompany = companyFilterEl.value;
-            const searchTerm = searchInputEl.value.toLowerCase();
-            if (lastHoveredItem) {
-                lastHoveredItem.classList.remove('active');
-                lastHoveredItem = null;
-            }
+    const updateFilterTags = () => {
+        elements.filterTagsContainer.innerHTML = '';
+        const createTag = (text, resetFn) => {
+            const tag = document.createElement('div');
+            tag.className = 'filter-tag';
+            tag.innerHTML = `<span>${text}</span><i class="fas fa-times"></i>`;
+            tag.querySelector('i').onclick = resetFn;
+            elements.filterTagsContainer.appendChild(tag);
+        };
+        if (elements.searchInput.value) createTag(`Search: ${elements.searchInput.value}`, () => { elements.searchInput.value = ''; applyFilters(); });
+        if (elements.unitFilter.value) createTag(`Unit: ${elements.unitFilter.value}`, () => { elements.unitFilter.value = ''; applyFilters(); });
+        if (elements.companyFilter.value) createTag(`Source: ${elements.companyFilter.value}`, () => { elements.companyFilter.value = ''; applyFilters(); });
+    };
 
+    const applyFilters = () => {
+        const selectedUnit = elements.unitFilter.value;
+        const selectedCompany = elements.companyFilter.value;
+        const searchTerm = elements.searchInput.value.toLowerCase();
+        
+        const filtered = medicines.filter(med => 
+            (!selectedUnit || med.unit === selectedUnit) &&
+            (!selectedCompany || med.company === selectedCompany) &&
+            (med.name.toLowerCase().includes(searchTerm) || med.company.toLowerCase().includes(searchTerm))
+        );
+        
+        renderCards(filtered);
+        updateFilterTags();
 
-            medicineListEl.innerHTML = '';
-            let foundItems = false;
-            medicines.filter(medicine =>
-                (!selectedUnit || medicine.unit === selectedUnit) &&
-                (!selectedCompany || medicine.company === selectedCompany) &&
-                (medicine.name.toLowerCase().includes(searchTerm) || medicine.company.toLowerCase().includes(searchTerm))
-            ).forEach(medicine => {
-                medicineListEl.appendChild(createMedicineItem(medicine));
-                foundItems = true;
-            });
-
-            if (!foundItems) {
-                 medicineListEl.innerHTML = `<p style="color: var(--text-dim); text-align: center; width: 100%; padding: 20px 0;">No matching results found.</p>`;
-            }
-            updateFilterIndicators();
+        if (filtered.length === 0 && searchTerm.length > 2) {
+            displaySuggestions(findSimilarTerms(searchTerm));
+        } else if (elements.suggestionsArea.innerHTML.includes('[Assist]')) {
+            elements.suggestionsArea.innerHTML = '';
         }
+    };
 
-        function resetFilters() {
-            unitFilterEl.value = '';
-            companyFilterEl.value = '';
-            searchInputEl.value = '';
-            filterMedicines();
-        }
+    const resetAllFilters = () => {
+        elements.unitFilter.value = '';
+        elements.companyFilter.value = '';
+        elements.searchInput.value = '';
+        applyFilters();
+    };
 
-        function updateFilterIndicators() {
-            const indicatorsEl = document.getElementById('filterIndicators');
-            indicatorsEl.innerHTML = '';
+    let searchTimeout;
+    elements.searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(applyFilters, 300);
+    });
 
-            if (unitFilterEl.value) {
-                addFilterIndicator('Unit: ' + unitFilterEl.options[unitFilterEl.selectedIndex].text, () => {
-                    unitFilterEl.value = '';
-                    filterMedicines();
-                });
-            }
+    elements.unitFilter.addEventListener('change', applyFilters);
+    elements.companyFilter.addEventListener('change', applyFilters);
+    elements.resetFiltersBtn.addEventListener('click', resetAllFilters);
+    elements.cardContainer.addEventListener('mouseleave', resetPreview);
 
-            if (companyFilterEl.value) {
-                addFilterIndicator('Company: ' + companyFilterEl.options[companyFilterEl.selectedIndex].text, () => {
-                    companyFilterEl.value = '';
-                    filterMedicines();
-                });
-            }
+    const scrollAmount = 350;
+    elements.scrollLeftBtn.addEventListener('click', () => elements.cardContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+    elements.scrollRightBtn.addEventListener('click', () => elements.cardContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
 
-            if (searchInputEl.value) {
-                addFilterIndicator('Search: ' + searchInputEl.value, () => {
-                    searchInputEl.value = '';
-                    filterMedicines();
-                });
-            }
-        }
-
-        function addFilterIndicator(text, removeCallback) {
-            const indicator = document.createElement('div');
-            indicator.className = 'filter-indicator';
-            indicator.innerHTML = `${text} <i class="fas fa-times"></i>`;
-            indicator.querySelector('i').addEventListener('click', removeCallback);
-            document.getElementById('filterIndicators').appendChild(indicator);
-        }
-
-        unitFilterEl.addEventListener('change', filterMedicines);
-        companyFilterEl.addEventListener('change', filterMedicines);
-        searchInputEl.addEventListener('input', filterMedicines);
-        resetFiltersButtonEl.addEventListener('click', resetFilters);
-
-        scrollLeftBtn.addEventListener('click', () => {
-            const itemWidth = medicineListEl.firstChild ? medicineListEl.firstChild.offsetWidth : 320;
-            const gap = 35;
-            medicineListEl.scrollBy({ left: -(itemWidth + gap) * 1, behavior: 'smooth' });
-        });
-
-        scrollRightBtn.addEventListener('click', () => {
-             const itemWidth = medicineListEl.firstChild ? medicineListEl.firstChild.offsetWidth : 320;
-            const gap = 35;
-            medicineListEl.scrollBy({ left: (itemWidth + gap) * 1, behavior: 'smooth' });
-        });
-
-        populateFilters();
-        filterMedicines();
-    </script>
+    populateFilters();
+    applyFilters();
+});
+</script>
 </body>
 </html>

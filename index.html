@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lx Search P1.4</title>
+<title>Lx Search P1.5</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,9 @@
     --font-body: 'Inter', sans-serif;
 
     --app-height: 100vh;
-    --bg-void: #030405;
-    --bg-deep: #07080b;
+    --bg-void: #1c1c20;
+    --bg-deep: #26262b;
+    --bg-highlight: #38373b;
     --bg-glass: rgba(255, 255, 255, 0.04);
     --bg-glass-strong: rgba(255, 255, 255, 0.085);
     --hairline: rgba(255, 255, 255, 0.08);
@@ -41,7 +42,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background: radial-gradient(120% 90% at 10% -6%, #0c0e14 0%, var(--bg-deep) 38%, var(--bg-void) 100%);
+    background: radial-gradient(120% 90% at 10% -6%, var(--bg-highlight) 0%, var(--bg-deep) 42%, var(--bg-void) 100%);
     font-family: var(--font-body);
     color: var(--text-primary);
     height: var(--app-height);
@@ -311,7 +312,7 @@ body {
     position: absolute;
     top: 48px;
     right: 0;
-    background: rgba(6, 7, 12, 0.94);
+    background: rgba(28, 28, 32, 0.94);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     border: 1px solid var(--hairline-bright);
@@ -430,7 +431,7 @@ body {
     position: absolute;
     top: 42%;
     transform: translateY(-50%);
-    background: rgba(6, 7, 11, 0.72);
+    background: rgba(28, 28, 32, 0.72);
     backdrop-filter: blur(14px);
     border: 1px solid var(--hairline);
     color: var(--text-primary);
